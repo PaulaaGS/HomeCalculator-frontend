@@ -26,7 +26,7 @@ export const SummaryView = () => {
   useEffect(() => {
     (async () => {
 
-      const res = await fetch(`http://localhost:3001/summary`);
+      const res = await fetch('http://localhost:3001/summary');
       const data = await res.json();
 
       setSummary(data);
