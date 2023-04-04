@@ -3,16 +3,12 @@ import styled from 'styled-components';
 
 const Container = styled.div`
     font-size: 20px;
-`
+`;
 
 type CurrencyProps = {
-    amount: number
-}
+    amount: number;
+};
 
 export const Currency = (props: CurrencyProps) => {
-    return (
-        <Container>
-            {props.amount.toFixed(2)} zł
-        </Container>
-    )
-}
+    return <Container>{props.amount.toFixed(2)} zł</Container>;
+};
