@@ -1,14 +1,17 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import React from 'react';
 
 const H1 = styled.h1`
+    font-family: cursive;
     font-size: 35px;
-    background: #cef1ce;
-    padding: 5px;
+    background: #80dacb;
+    padding: 20px;
     color: #163516;
-    justify-content: space-between;
     text-align: center;
-`
+    margin-top: auto;
+    border-color: black;
+    border-bottom-style: outset;
+`;
 
 export const Header = () => {
     return (

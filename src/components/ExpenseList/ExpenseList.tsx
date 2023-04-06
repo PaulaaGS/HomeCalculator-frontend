@@ -9,6 +9,9 @@ import { useEffect, useState } from 'react';
 import { ShortExpense } from '../../interfaces/short-expense';
 import { TableCurrencyCell } from './TableCurrencyCell';
 import { TableHeaderCell } from './TableHeaderCell';
+import { NavLink } from 'react-router-dom';
+import { Box, Button } from '@mui/material';
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
@@ -23,38 +26,66 @@ export const ExpenseListView = () => {
     }, []);
 
     return (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-                <TableHead style={{ textTransform: 'uppercase' }}>
-                    <TableRow>
-                        <TableHeaderCell>Expense</TableHeaderCell>
-                        <TableHeaderCell>Price</TableHeaderCell>
-                        <TableHeaderCell>Paid</TableHeaderCell>
-                        <TableHeaderCell>Status</TableHeaderCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {allExpenses.map((row) => (
-                        <TableRow
-                            key={row.name}
-                            sx={{
-                                '&:last-child td, &:last-child th': {
-                                    border: 0,
-                                },
-                            }}
-                        >
-                            <TableCell component='th' scope='row'>
-                                {row.name}
-                            </TableCell>
-                            <TableCurrencyCell amount={row.price} />
-                            <TableCurrencyCell amount={row.paidAmount} />
-                            <TableCell align='center'>
-                                {row.orderStatus}
-                            </TableCell>
+        <>
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                    <TableHead
+                        style={{
+                            textTransform: 'uppercase',
+                            background: '#619792',
+                        }}
+                    >
+                        <TableRow>
+                            <TableHeaderCell>Expense</TableHeaderCell>
+                            <TableHeaderCell>Price</TableHeaderCell>
+                            <TableHeaderCell>Paid</TableHeaderCell>
+                            <TableHeaderCell>Status</TableHeaderCell>
+                            <TableHeaderCell> </TableHeaderCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {allExpenses.map((row) => (
+                            <TableRow key={row.name}>
+                                <TableCell>
+                                    <NavLink
+                                        style={{
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                        }}
+                                        to={row.id}
+                                    >
+                                        {row.name}
+                                    </NavLink>
+                                </TableCell>
+                                <TableCurrencyCell amount={row.price} />
+                                <TableCurrencyCell amount={row.paidAmount} />
+                                <TableCell align='center'>
+                                    {row.orderStatus}
+                                </TableCell>
+                                <TableCell align='center' width={100}>
+                                    <NavLink
+                                        style={{ textDecoration: 'none' }}
+                                        to={`edit/${row.id}`}
+                                    >
+                                        <BorderColorOutlinedIcon
+                                            style={{
+                                                color: 'black',
+                                                textDecoration: 'none',
+                                            }}
+                                        />
+                                    </NavLink>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+
+            <Box margin={'20px 0'} textAlign={'center'}>
+                <NavLink style={{ textDecoration: 'none' }} to='/'>
+                    <Button variant='outlined'>Summary</Button>
+                </NavLink>
+            </Box>
+        </>
     );
 };
