@@ -1,3 +1,5 @@
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import { Box, Button, IconButton } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -6,25 +8,37 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { ShortExpense } from '../../interfaces/short-expense';
+import { getOrderStatusLabel } from '../../utils/order-status';
 import { TableCurrencyCell } from './TableCurrencyCell';
 import { TableHeaderCell } from './TableHeaderCell';
-import { NavLink } from 'react-router-dom';
-import { Box, Button } from '@mui/material';
-import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
-import { getOrderStatusLabel } from '../../utils/order-status';
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
 
-    useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:3001/expense/short-list');
-            const data = await res.json();
+    const loadExpenses = async () => {
+        const res = await fetch('http://localhost:3001/expense/short-list');
+        const data = await res.json();
 
-            setAllExpenses(data);
-        })();
+        setAllExpenses(data);
+    };
+
+    useEffect(() => {
+        loadExpenses();
     }, []);
+
+    const handleDelete = async (id: string) => {
+        try {
+            await fetch(`http://localhost:3001/expense/${id}`, {
+                method: 'DELETE',
+            });
+            await loadExpenses();
+        } catch {
+            console.error('Error occurred while deleting expense.');
+        }
+    };
 
     return (
         <>
@@ -68,13 +82,27 @@ export const ExpenseListView = () => {
                                         style={{ textDecoration: 'none' }}
                                         to={`edit/${row.id}`}
                                     >
-                                        <BorderColorOutlinedIcon
+                                        <IconButton>
+                                            <BorderColorOutlinedIcon
+                                                fontSize='small'
+                                                style={{
+                                                    color: 'black',
+                                                    textDecoration: 'none',
+                                                }}
+                                            />
+                                        </IconButton>
+                                    </NavLink>
+                                    <IconButton
+                                        onClick={() => handleDelete(row.id)}
+                                    >
+                                        <DeleteOutlineOutlinedIcon
+                                            fontSize='medium'
                                             style={{
                                                 color: 'black',
                                                 textDecoration: 'none',
                                             }}
                                         />
-                                    </NavLink>
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         ))}

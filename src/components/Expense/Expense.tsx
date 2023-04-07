@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Expense } from '../../interfaces/expense';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { getAmountWithCurrency } from '../../utils/currency';
 import TextField from '@mui/material/TextField';
 import { Box, Button, Grid } from '@mui/material';
@@ -11,6 +11,11 @@ import { getUnitLabel } from '../../utils/unit';
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
     const { idOfExpense } = useParams();
+    const navigate = useNavigate();
+
+    if (!idOfExpense) {
+        return null;
+    }
 
     useEffect(() => {
         (async () => {
@@ -21,7 +26,18 @@ export const ExpenseView = () => {
         })();
     }, []);
 
-    if (oneExpense === null) {
+    const handleDelete = async (id: string) => {
+        try {
+            await fetch(`http://localhost:3001/expense/${id}`, {
+                method: 'DELETE',
+            });
+            navigate('/expenses');
+        } catch {
+            console.error('Error occurred while deleting expense.');
+        }
+    };
+
+    if (!oneExpense) {
         return null;
     }
 
@@ -171,6 +187,43 @@ export const ExpenseView = () => {
                         />
                     </Grid>
                 </Grid>
+                <Box
+                    margin='20px 0'
+                    justifyContent={'flex-end'}
+                    display={'flex'}
+                    gap='10px'
+                >
+                    <NavLink
+                        style={{ textDecoration: 'none' }}
+                        to={`/expenses/edit/${idOfExpense}`}
+                    >
+                        <Button
+                            variant='contained'
+                            sx={{
+                                ':hover': {
+                                    backgroundColor: '#1e4536',
+                                },
+                                width: '100px',
+                                backgroundColor: '#2a5f4b',
+                            }}
+                        >
+                            Edytuj
+                        </Button>
+                    </NavLink>
+                    <Button
+                        onClick={() => handleDelete(idOfExpense)}
+                        variant='contained'
+                        sx={{
+                            ':hover': {
+                                backgroundColor: '#a6010f',
+                            },
+                            width: '100px',
+                            backgroundColor: '#c30010',
+                        }}
+                    >
+                        Usuń
+                    </Button>
+                </Box>
                 <Box margin={'20px 0'} textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
                         <Button
