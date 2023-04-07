@@ -6,5 +6,4 @@ export enum Unit {
     LITER = 'liter',
     GRAM = 'gram',
     KILO = 'kilo',
-  }
-  
+}

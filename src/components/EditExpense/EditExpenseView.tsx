@@ -19,7 +19,7 @@ export const EditExpenseView = () => {
 
     const onFormSubmit = async (values: FormValues) => {
         setLoading(true);
-        
+
         try {
             await fetch(`http://localhost:3001/expense/${idOfExpense}`, {
                 method: 'PUT',

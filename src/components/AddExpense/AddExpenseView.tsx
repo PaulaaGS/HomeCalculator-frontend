@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { OrderStatus } from '../../enums/order-status';
 import { Unit } from '../../enums/unit';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const initialValues: FormValues = {
     description: null,
@@ -30,7 +30,7 @@ export const AddExpenseView = () => {
                 }),
             });
 
-            navigate('/expenses')
+            navigate('/expenses');
         } finally {
             setLoading(false);
         }

@@ -3,4 +3,3 @@ export enum OrderStatus {
     ORDERED = 'ordered',
     DELIVERED = 'delivered',
 }
-

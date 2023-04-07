@@ -13,7 +13,7 @@ const Background = styled.div`
 
 const Main = styled.main`
     padding-top: 20px;
-`
+`;
 
 export const Layout = ({ children }: LayoutProps) => {
     return (
