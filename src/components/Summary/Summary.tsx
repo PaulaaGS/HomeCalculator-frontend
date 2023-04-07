@@ -52,7 +52,7 @@ export const SummaryView = () => {
                     <Button
                         variant='contained'
                         sx={{
-                            backgroundColor: '#f48529'
+                            backgroundColor: '#f48529',
                         }}
                     >
                         Lista wydatków

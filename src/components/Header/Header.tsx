@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 
 const H1 = styled.h1`
-    font-family: "Gill Sans", sans-serif;
+    font-family: 'Gill Sans', sans-serif;
     font-variant: small-caps;
     font-size: 35px;
     background: #2a5f4b;

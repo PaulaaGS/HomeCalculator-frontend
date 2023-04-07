@@ -5,6 +5,7 @@ import { Layout } from './components/Layout/Layout';
 import { SummaryView } from './components/Summary/Summary';
 import { ExpenseView } from './components/Expense/Expense';
 import { EditExpenseView } from './components/EditExpense/EditExpenseView';
+import { AddExpenseView } from './components/AddExpense/AddExpenseView';
 
 export const App = () => {
     return (
@@ -21,6 +22,7 @@ export const App = () => {
                         path='/expenses/edit/:idOfExpense'
                         element={<EditExpenseView />}
                     />
+                    <Route path='/expenses/add' element={<AddExpenseView />} />
                 </Routes>
             </Layout>
         </>

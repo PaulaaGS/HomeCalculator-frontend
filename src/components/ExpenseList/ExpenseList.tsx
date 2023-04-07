@@ -93,6 +93,16 @@ export const ExpenseListView = () => {
                         Podsumowanie
                     </Button>
                 </NavLink>
+                <NavLink style={{ textDecoration: 'none' }} to='/expenses/add'>
+                    <Button
+                        variant='contained'
+                        sx={{
+                            backgroundColor: '#2a5f4b',
+                        }}
+                    >
+                        Dodaj wydatek
+                    </Button>
+                </NavLink>
             </Box>
         </>
     );

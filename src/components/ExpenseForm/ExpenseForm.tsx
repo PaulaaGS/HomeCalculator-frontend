@@ -16,14 +16,19 @@ import { Unit } from '../../enums/unit';
 import { OrderStatus } from '../../enums/order-status';
 import { getOrderStatusLabel } from '../../utils/order-status';
 
-export type FormValues = Omit<Expense, 'id'>;
+export type FormValues = Partial<Omit<Expense, 'id'>>;
 
-type EditExpenseFormProps = {
+type ExpenseFormProps = {
     initialValues: FormValues;
-    onFormSubmit: (values:FormValues) => void
+    onFormSubmit: (values: FormValues) => void;
+    loading: boolean;
 };
 
-export const EditExpenseForm = ({ initialValues, onFormSubmit }: EditExpenseFormProps) => {
+export const ExpenseForm = ({
+    initialValues,
+    onFormSubmit,
+    loading,
+}: ExpenseFormProps) => {
     const validationSchema = yup.object({
         name: yup.string().required('Nazwa jest wymagana'),
     });
@@ -32,7 +37,7 @@ export const EditExpenseForm = ({ initialValues, onFormSubmit }: EditExpenseForm
         initialValues,
         validationSchema,
         onSubmit: (values) => {
-            onFormSubmit(values)
+            onFormSubmit(values);
         },
     });
 
@@ -237,6 +242,7 @@ export const EditExpenseForm = ({ initialValues, onFormSubmit }: EditExpenseForm
                 </Grid>
                 <Box margin={'20px 0'} textAlign={'center'}>
                     <Button
+                        disabled={loading}
                         fullWidth
                         color='primary'
                         variant='contained'
