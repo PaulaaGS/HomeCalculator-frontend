@@ -4,12 +4,12 @@ import { Unit } from '../enums/unit';
 export interface Expense {
     id: string;
     name: string;
-    description: string;
+    description: string | null;
     unit: Unit;
     unitPriceNet: number;
     quantity: number;
     paidAmount: number;
     orderStatus: OrderStatus;
-    url: string;
+    url: string | null;
     vatRate: number;
 }

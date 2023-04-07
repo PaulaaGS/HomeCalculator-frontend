@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Expense } from '../../interfaces/expense';
-import { EditExpenseForm, FormValues } from './EditExpenseForm';
+import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 
 export const EditExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
     const { idOfExpense } = useParams();
 
     useEffect(() => {
@@ -17,21 +18,28 @@ export const EditExpenseView = () => {
     }, []);
 
     const onFormSubmit = async (values: FormValues) => {
-        await fetch(`http://localhost:3001/expense/${idOfExpense}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                ...values,
-            })
-        });
-    }
+        setLoading(true);
+        
+        try {
+            await fetch(`http://localhost:3001/expense/${idOfExpense}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...values,
+                }),
+            });
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return oneExpense ? (
-        <EditExpenseForm
+        <ExpenseForm
             initialValues={oneExpense}
             onFormSubmit={onFormSubmit}
+            loading={loading}
         />
     ) : null;
 };
