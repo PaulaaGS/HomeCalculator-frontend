@@ -2,11 +2,12 @@ import styled from 'styled-components';
 import React from 'react';
 
 const H1 = styled.h1`
-    font-family: cursive;
+    font-family: "Gill Sans", sans-serif;
+    font-variant: small-caps;
     font-size: 35px;
-    background: #80dacb;
-    padding: 20px;
-    color: #163516;
+    background: #2a5f4b;
+    padding: 30px;
+    color: #ffffff;
     text-align: center;
     margin-top: auto;
     border-color: black;

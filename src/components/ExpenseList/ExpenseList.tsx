@@ -12,6 +12,7 @@ import { TableHeaderCell } from './TableHeaderCell';
 import { NavLink } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import { getOrderStatusLabel } from '../../utils/order-status';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
@@ -32,13 +33,13 @@ export const ExpenseListView = () => {
                     <TableHead
                         style={{
                             textTransform: 'uppercase',
-                            background: '#619792',
+                            background: '#faceaa',
                         }}
                     >
                         <TableRow>
-                            <TableHeaderCell>Expense</TableHeaderCell>
-                            <TableHeaderCell>Price</TableHeaderCell>
-                            <TableHeaderCell>Paid</TableHeaderCell>
+                            <TableHeaderCell>Wydatek</TableHeaderCell>
+                            <TableHeaderCell>Cena</TableHeaderCell>
+                            <TableHeaderCell>Zapłacona kwota</TableHeaderCell>
                             <TableHeaderCell>Status</TableHeaderCell>
                             <TableHeaderCell> </TableHeaderCell>
                         </TableRow>
@@ -60,7 +61,7 @@ export const ExpenseListView = () => {
                                 <TableCurrencyCell amount={row.price} />
                                 <TableCurrencyCell amount={row.paidAmount} />
                                 <TableCell align='center'>
-                                    {row.orderStatus}
+                                    {getOrderStatusLabel(row.orderStatus)}
                                 </TableCell>
                                 <TableCell align='center' width={100}>
                                     <NavLink
@@ -83,7 +84,14 @@ export const ExpenseListView = () => {
 
             <Box margin={'20px 0'} textAlign={'center'}>
                 <NavLink style={{ textDecoration: 'none' }} to='/'>
-                    <Button variant='outlined'>Summary</Button>
+                    <Button
+                        variant='contained'
+                        sx={{
+                            backgroundColor: '#f48529',
+                        }}
+                    >
+                        Podsumowanie
+                    </Button>
                 </NavLink>
             </Box>
         </>

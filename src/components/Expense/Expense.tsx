@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Expense } from '../../interfaces/expense';
 import { useParams } from 'react-router';
-import { getAmountWithCurrency } from '../../utils/utils';
+import { getAmountWithCurrency } from '../../utils/currency';
 import TextField from '@mui/material/TextField';
 import { Box, Button, Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import { getOrderStatusLabel } from '../../utils/order-status';
+import { getUnitLabel } from '../../utils/unit';
 
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -29,7 +31,7 @@ export const ExpenseView = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
-                            label='Expense'
+                            label='Wydatek'
                             name='name'
                             defaultValue={oneExpense.name}
                             InputProps={{
@@ -41,7 +43,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={12}>
                         <TextField
-                            label='Description'
+                            label='Opis wydatku'
                             name='description'
                             defaultValue={oneExpense.description}
                             multiline
@@ -55,7 +57,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={4}>
                         <TextField
-                            label='Unit price (net)'
+                            label='Cena jednostkowa (netto)'
                             name='unitPriceNet'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.unitPriceNet,
@@ -68,7 +70,7 @@ export const ExpenseView = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <TextField
-                            label='Vat rate'
+                            label='Stawka VAT'
                             name='vatRate'
                             defaultValue={oneExpense.vatRate * 100 + '%'}
                             InputProps={{
@@ -79,7 +81,7 @@ export const ExpenseView = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <TextField
-                            label='Unit price (gross)'
+                            label='Cena jednostkowa (brutto)'
                             name='unitPriceGross'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.unitPriceNet *
@@ -94,7 +96,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={4}>
                         <TextField
-                            label='Quantity'
+                            label='Ilość'
                             name='quantity'
                             defaultValue={oneExpense.quantity}
                             InputProps={{
@@ -105,9 +107,9 @@ export const ExpenseView = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <TextField
-                            label='Unit'
+                            label='Jednostka'
                             name='unit'
-                            defaultValue={oneExpense.unit}
+                            defaultValue={getUnitLabel(oneExpense.unit)}
                             InputProps={{
                                 readOnly: true,
                             }}
@@ -116,7 +118,7 @@ export const ExpenseView = () => {
                     </Grid>
                     <Grid item xs={4}>
                         <TextField
-                            label='Final price (gross)'
+                            label='Cena końcowa (brutto)'
                             name='finalPriceGross'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.unitPriceNet *
@@ -132,7 +134,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={6}>
                         <TextField
-                            label='Paid amount'
+                            label='Zapłacona kwota'
                             name='paidAmount'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.paidAmount,
@@ -145,9 +147,11 @@ export const ExpenseView = () => {
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
-                            label='Order status'
+                            label='Status zamówienia'
                             name='orderStatus'
-                            defaultValue={oneExpense.orderStatus}
+                            defaultValue={getOrderStatusLabel(
+                                oneExpense.orderStatus,
+                            )}
                             InputProps={{
                                 readOnly: true,
                             }}
@@ -157,7 +161,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={12}>
                         <TextField
-                            label='URL'
+                            label='Link do strony'
                             name='url'
                             defaultValue={oneExpense.url}
                             InputProps={{
@@ -169,7 +173,14 @@ export const ExpenseView = () => {
                 </Grid>
                 <Box margin={'20px 0'} textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
-                        <Button variant='outlined'>Back to list</Button>
+                        <Button
+                            variant='contained'
+                            sx={{
+                                backgroundColor: '#f48529',
+                            }}
+                        >
+                            Powrót do listy wydatków
+                        </Button>
                     </NavLink>
                 </Box>
             </Box>

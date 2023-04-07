@@ -4,7 +4,7 @@ import { ExpenseListView } from './components/ExpenseList/ExpenseList';
 import { Layout } from './components/Layout/Layout';
 import { SummaryView } from './components/Summary/Summary';
 import { ExpenseView } from './components/Expense/Expense';
-import { EditExpenseView } from './components/EditExpense/EditExpense';
+import { EditExpenseView } from './components/EditExpense/EditExpenseView';
 
 export const App = () => {
     return (

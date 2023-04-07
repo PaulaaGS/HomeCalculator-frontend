@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getAmountWithCurrency } from '../../utils/utils';
+import { getAmountWithCurrency } from '../../utils/currency';
 
 const Container = styled.div`
     font-size: 20px;

@@ -1,5 +1,5 @@
 import { TableCell } from '@mui/material';
-import { getAmountWithCurrency } from '../../utils/utils';
+import { getAmountWithCurrency } from '../../utils/currency';
 
 type TableCurrencyCellProps = {
     amount: number;
