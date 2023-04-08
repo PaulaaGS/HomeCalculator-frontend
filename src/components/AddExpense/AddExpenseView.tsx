@@ -5,10 +5,8 @@ import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { useNavigate } from 'react-router-dom';
 
 const initialValues: FormValues = {
-    description: null,
     unit: Unit.PIECE,
     orderStatus: OrderStatus.NOT_ORDERED,
-    url: null,
     vatRate: 0.23,
 };
 
