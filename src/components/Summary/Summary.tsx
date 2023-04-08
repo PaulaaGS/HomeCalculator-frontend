@@ -12,6 +12,7 @@ const Container = styled.div`
     display: flex;
     width: 40%;
     margin: 0 auto;
+    font-weight: bold;
 `;
 
 const style = {
@@ -52,6 +53,9 @@ export const SummaryView = () => {
                     <Button
                         variant='contained'
                         sx={{
+                            ':hover': {
+                                backgroundColor: '#e07824',
+                            },
                             backgroundColor: '#f48529',
                         }}
                     >

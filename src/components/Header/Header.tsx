@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const H1 = styled.h1`
     font-family: 'Gill Sans', sans-serif;
@@ -16,8 +16,13 @@ const H1 = styled.h1`
 
 export const Header = () => {
     return (
-        <>
-            <H1>Home Calculator</H1>
-        </>
+        <H1>
+            <NavLink
+                style={{ textDecoration: 'none', color: 'inherit' }}
+                to='/'
+            >
+                Home Calculator
+            </NavLink>
+        </H1>
     );
 };

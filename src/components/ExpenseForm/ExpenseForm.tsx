@@ -6,6 +6,7 @@ import {
     InputLabel,
     Select,
     MenuItem,
+    InputAdornment,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import { NavLink } from 'react-router-dom';
@@ -24,15 +25,39 @@ type ExpenseFormProps = {
     loading: boolean;
 };
 
+const validationSchema = yup.object({
+    name: yup
+        .string()
+        .required('Pole obowiązkowe')
+        .min(3, 'Nazwa musi mieć od 3 do 60 znaków')
+        .max(60, 'Nazwa musi mieć od 3 do 60 znaków'),
+    description: yup
+        .string()
+        .nullable()
+        .max(10000, 'Opis może mieć maksymalnie 10000 znaków'),
+    unitPriceNet: yup
+        .number()
+        .required('Pole obowiązkowe')
+        .min(0, 'Cena nie może być ujemna'),
+    quantity: yup
+        .number()
+        .required('Pole obowiązkowe')
+        .min(1, 'Ilość musi być większa od zera'),
+    paidAmount: yup
+        .number()
+        .nullable()
+        .min(0, 'Zapłacona kwota nie może być ujemna'),
+    url: yup
+        .string()
+        .nullable()
+        .max(2048, 'Link do strony może mieć maksymalnie 2048 znaków'),
+});
+
 export const ExpenseForm = ({
     initialValues,
     onFormSubmit,
     loading,
 }: ExpenseFormProps) => {
-    const validationSchema = yup.object({
-        name: yup.string().required('Nazwa jest wymagana'),
-    });
-
     const formik = useFormik<FormValues>({
         initialValues,
         validationSchema,
@@ -50,7 +75,7 @@ export const ExpenseForm = ({
                             fullWidth
                             id='name'
                             name='name'
-                            label='Wydatek'
+                            label='Nazwa'
                             value={formik.values.name}
                             onChange={formik.handleChange}
                             error={
@@ -69,7 +94,7 @@ export const ExpenseForm = ({
                             maxRows={8}
                             id='description'
                             name='description'
-                            label='Opis wydatku'
+                            label='Opis'
                             value={formik.values.description}
                             onChange={formik.handleChange}
                             error={
@@ -83,12 +108,13 @@ export const ExpenseForm = ({
                         />
                     </Grid>
 
-                    <Grid item xs={3}>
+                    <Grid item xs={6}>
                         <TextField
                             fullWidth
                             id='unitPriceNet'
                             name='unitPriceNet'
-                            label='Cena jednostkowa (netto)'
+                            label='Cena jedn. (netto)'
+                            type='number'
                             value={formik.values.unitPriceNet}
                             onChange={formik.handleChange}
                             error={
@@ -99,10 +125,17 @@ export const ExpenseForm = ({
                                 formik.touched.unitPriceNet &&
                                 formik.errors.unitPriceNet
                             }
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+                                        zł
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </Grid>
 
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                         <FormControl fullWidth>
                             <InputLabel id='vatRateLabel'>
                                 Stawka VAT
@@ -127,12 +160,13 @@ export const ExpenseForm = ({
                         </FormControl>
                     </Grid>
 
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                         <TextField
                             fullWidth
                             id='quantity'
                             name='quantity'
                             label='Ilość'
+                            type='number'
                             value={formik.values.quantity}
                             onChange={formik.handleChange}
                             error={
@@ -146,7 +180,7 @@ export const ExpenseForm = ({
                         />
                     </Grid>
 
-                    <Grid item xs={3}>
+                    <Grid item xs={2}>
                         <FormControl fullWidth>
                             <InputLabel id='unitLabel'>Jednostka</InputLabel>
                             <Select
@@ -179,7 +213,8 @@ export const ExpenseForm = ({
                             fullWidth
                             id='paidAmount'
                             name='paidAmount'
-                            label='Zapłacona kwota'
+                            label='Zapłacona kwota (brutto)'
+                            type='number'
                             value={formik.values.paidAmount}
                             onChange={formik.handleChange}
                             error={
@@ -190,6 +225,13 @@ export const ExpenseForm = ({
                                 formik.touched.paidAmount &&
                                 formik.errors.paidAmount
                             }
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position='end'>
+                                        zł
+                                    </InputAdornment>
+                                ),
+                            }}
                         />
                     </Grid>
 
@@ -240,23 +282,36 @@ export const ExpenseForm = ({
                         />
                     </Grid>
                 </Grid>
-                <Box margin={'20px 0'} textAlign={'center'}>
+                <Box
+                    margin='20px 0'
+                    justifyContent={'flex-end'}
+                    display={'flex'}
+                    gap='10px'
+                >
                     <Button
                         disabled={loading}
-                        fullWidth
                         color='primary'
                         variant='contained'
                         type='submit'
                         sx={{
+                            ':hover': {
+                                backgroundColor: '#1e4536',
+                            },
                             backgroundColor: '#2a5f4b',
+                            width: '100px',
                         }}
                     >
                         Zapisz
                     </Button>
+                </Box>
+                <Box textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
                         <Button
                             variant='contained'
                             sx={{
+                                ':hover': {
+                                    backgroundColor: '#e07824',
+                                },
                                 backgroundColor: '#f48529',
                             }}
                         >

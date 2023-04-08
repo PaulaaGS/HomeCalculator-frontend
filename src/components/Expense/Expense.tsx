@@ -47,7 +47,7 @@ export const ExpenseView = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
-                            label='Wydatek'
+                            label='Nazwa'
                             name='name'
                             defaultValue={oneExpense.name}
                             InputProps={{
@@ -59,7 +59,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={12}>
                         <TextField
-                            label='Opis wydatku'
+                            label='Opis'
                             name='description'
                             defaultValue={oneExpense.description}
                             multiline
@@ -73,7 +73,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={4}>
                         <TextField
-                            label='Cena jednostkowa (netto)'
+                            label='Cena jedn. (netto)'
                             name='unitPriceNet'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.unitPriceNet,
@@ -84,7 +84,7 @@ export const ExpenseView = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <TextField
                             label='Stawka VAT'
                             name='vatRate'
@@ -95,9 +95,9 @@ export const ExpenseView = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                         <TextField
-                            label='Cena jednostkowa (brutto)'
+                            label='Cena jedn. (brutto)'
                             name='unitPriceGross'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.unitPriceNet *
@@ -121,7 +121,7 @@ export const ExpenseView = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={2}>
                         <TextField
                             label='Jednostka'
                             name='unit'
@@ -132,7 +132,7 @@ export const ExpenseView = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={4}>
+                    <Grid item xs={6}>
                         <TextField
                             label='Cena końcowa (brutto)'
                             name='finalPriceGross'
@@ -150,7 +150,7 @@ export const ExpenseView = () => {
 
                     <Grid item xs={6}>
                         <TextField
-                            label='Zapłacona kwota'
+                            label='Zapłacona kwota (brutto)'
                             name='paidAmount'
                             defaultValue={getAmountWithCurrency(
                                 oneExpense.paidAmount,
@@ -229,6 +229,9 @@ export const ExpenseView = () => {
                         <Button
                             variant='contained'
                             sx={{
+                                ':hover': {
+                                    backgroundColor: '#e07824',
+                                },
                                 backgroundColor: '#f48529',
                             }}
                         >
