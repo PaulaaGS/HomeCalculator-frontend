@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Expense } from '../../interfaces/expense';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
+import { useNavigate } from 'react-router-dom';
 
 export const EditExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
+    const navigate = useNavigate();
     const { idOfExpense } = useParams();
 
     useEffect(() => {
@@ -30,6 +32,8 @@ export const EditExpenseView = () => {
                     ...values,
                 }),
             });
+
+            navigate('/expenses');
         } finally {
             setLoading(false);
         }
@@ -37,9 +41,9 @@ export const EditExpenseView = () => {
 
     return oneExpense ? (
         <ExpenseForm
+            loading={loading}
             initialValues={oneExpense}
             onFormSubmit={onFormSubmit}
-            loading={loading}
         />
     ) : null;
 };

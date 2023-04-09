@@ -7,7 +7,10 @@ type TableHeaderCellProps = {
 
 export const TableHeaderCell = (props: TableHeaderCellProps) => {
     return (
-        <TableCell style={{ fontWeight: 'bold' }} align='center'>
+        <TableCell
+            style={{ fontWeight: 'bold', background: '#faceaa' }}
+            align='center'
+        >
             {props.children}
         </TableCell>
     );

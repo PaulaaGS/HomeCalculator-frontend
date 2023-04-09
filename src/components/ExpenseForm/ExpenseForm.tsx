@@ -1,7 +1,6 @@
 import {
     Grid,
     TextField,
-    Button,
     FormControl,
     InputLabel,
     Select,
@@ -16,6 +15,8 @@ import * as yup from 'yup';
 import { Unit } from '../../enums/unit';
 import { OrderStatus } from '../../enums/order-status';
 import { getOrderStatusLabel } from '../../utils/order-status';
+import { GreenButton } from '../Button/GreenButton';
+import { OrangeButton } from '../Button/OrangeButton';
 
 export type FormValues = Partial<Omit<Expense, 'id'>>;
 
@@ -92,6 +93,7 @@ export const ExpenseForm = ({
                         <TextField
                             fullWidth
                             maxRows={8}
+                            multiline
                             id='description'
                             name='description'
                             label='Opis'
@@ -270,6 +272,8 @@ export const ExpenseForm = ({
                     <Grid item xs={12}>
                         <TextField
                             fullWidth
+                            maxRows={8}
+                            multiline
                             id='url'
                             name='url'
                             label='Link do strony'
@@ -288,35 +292,13 @@ export const ExpenseForm = ({
                     display={'flex'}
                     gap='10px'
                 >
-                    <Button
-                        disabled={loading}
-                        color='primary'
-                        variant='contained'
-                        type='submit'
-                        sx={{
-                            ':hover': {
-                                backgroundColor: '#1e4536',
-                            },
-                            backgroundColor: '#2a5f4b',
-                            width: '100px',
-                        }}
-                    >
+                    <GreenButton disabled={loading} type='submit'>
                         Zapisz
-                    </Button>
+                    </GreenButton>
                 </Box>
                 <Box textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
-                        <Button
-                            variant='contained'
-                            sx={{
-                                ':hover': {
-                                    backgroundColor: '#e07824',
-                                },
-                                backgroundColor: '#f48529',
-                            }}
-                        >
-                            Powrót do listy wydatków
-                        </Button>
+                        <OrangeButton width={200}>Powrót do listy</OrangeButton>
                     </NavLink>
                 </Box>
             </Box>
