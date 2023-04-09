@@ -1,6 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { ExpenseListView } from './components/ExpenseList/ExpenseList';
+import { ExpenseListView } from './components/ExpenseList/ExpenseListView';
 import { Layout } from './components/Layout/Layout';
 import { SummaryView } from './components/Summary/Summary';
 import { ExpenseView } from './components/Expense/Expense';

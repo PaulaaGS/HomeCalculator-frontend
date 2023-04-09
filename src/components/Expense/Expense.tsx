@@ -7,6 +7,8 @@ import { Box, Button, Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { getOrderStatusLabel } from '../../utils/order-status';
 import { getUnitLabel } from '../../utils/unit';
+import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
+import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
 
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -26,16 +28,8 @@ export const ExpenseView = () => {
         })();
     }, []);
 
-    const handleDelete = async (id: string) => {
-        try {
-            await fetch(`http://localhost:3001/expense/${id}`, {
-                method: 'DELETE',
-            });
-            navigate('/expenses');
-        } catch {
-            console.error('Error occurred while deleting expense.');
-        }
-    };
+    const { isModalOpen, handleModalOpen, handleCancel, handleConfirm } =
+        useDeleteConfirmation({ onDeleteSuccess: () => navigate('/expenses') });
 
     if (!oneExpense) {
         return null;
@@ -211,7 +205,7 @@ export const ExpenseView = () => {
                         </Button>
                     </NavLink>
                     <Button
-                        onClick={() => handleDelete(idOfExpense)}
+                        onClick={() => handleModalOpen(idOfExpense)}
                         variant='contained'
                         sx={{
                             ':hover': {
@@ -240,6 +234,12 @@ export const ExpenseView = () => {
                     </NavLink>
                 </Box>
             </Box>
+
+            <DeleteConfirmationModal
+                isOpen={isModalOpen}
+                onCancel={handleCancel}
+                onConfirm={handleConfirm}
+            />
         </>
     );
 };
