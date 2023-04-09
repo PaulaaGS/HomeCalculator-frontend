@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { Expense } from '../../interfaces/expense';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export const EditExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -33,7 +34,10 @@ export const EditExpenseView = () => {
                 }),
             });
 
+            toast('Zapisano zmiany!', { type: 'success' });
             navigate('/expenses');
+        } catch {
+            toast('Coś poszło nie tak!', { type: 'error' });
         } finally {
             setLoading(false);
         }

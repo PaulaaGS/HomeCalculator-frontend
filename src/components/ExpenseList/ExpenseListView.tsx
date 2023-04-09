@@ -8,6 +8,7 @@ import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
 import { ExpenseTable } from './ExpenseTable';
 import { GreenButton } from '../Button/GreenButton';
 import { OrangeButton } from '../Button/OrangeButton';
+import { toast } from 'react-toastify';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
@@ -21,6 +22,8 @@ export const ExpenseListView = () => {
             const data = await res.json();
 
             setAllExpenses(data);
+        } catch {
+            toast('Coś poszło nie tak!', { type: 'error' });
         } finally {
             setLoading(false);
         }

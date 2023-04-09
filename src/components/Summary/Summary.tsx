@@ -5,6 +5,7 @@ import { Summary } from '../../interfaces/summary';
 import { Currency } from './Currency';
 import { NavLink } from 'react-router-dom';
 import { OrangeButton } from '../Button/OrangeButton';
+import { toast } from 'react-toastify';
 
 const Container = styled.div`
     padding: 5px;
@@ -27,12 +28,17 @@ export const SummaryView = () => {
     });
 
     useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:3001/summary');
-            const data = await res.json();
+        const fetchSummary = async () => {
+            try {
+                const res = await fetch('http://localhost:3001/summary');
+                const data = await res.json();
 
-            setSummary(data);
-        })();
+                setSummary(data);
+            } catch {
+                toast('Coś poszło nie tak!', { type: 'error' });
+            }
+        };
+        fetchSummary();
     }, []);
 
     return (

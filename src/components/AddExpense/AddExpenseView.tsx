@@ -3,6 +3,7 @@ import { OrderStatus } from '../../enums/order-status';
 import { Unit } from '../../enums/unit';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const initialValues: FormValues = {
     unit: Unit.PIECE,
@@ -28,7 +29,10 @@ export const AddExpenseView = () => {
                 }),
             });
 
+            toast('Dodano wydatek!', { type: 'success' });
             navigate('/expenses');
+        } catch {
+            toast('Coś poszło nie tak!', { type: 'error' });
         } finally {
             setLoading(false);
         }

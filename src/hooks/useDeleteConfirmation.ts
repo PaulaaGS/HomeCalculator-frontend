@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 type DeleteConfirmationProps = {
     onDeleteSuccess?: () => void;
@@ -15,9 +16,10 @@ export const useDeleteConfirmation = ({
             await fetch(`http://localhost:3001/expense/${id}`, {
                 method: 'DELETE',
             });
+            toast('Usunięto wydatek!', { type: 'success' });
             onDeleteSuccess?.();
         } catch {
-            console.error('Error occurred while deleting expense.');
+            toast('Coś poszło nie tak!', { type: 'error' });
         }
     };
 

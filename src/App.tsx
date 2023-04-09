@@ -6,6 +6,8 @@ import { SummaryView } from './components/Summary/Summary';
 import { ExpenseView } from './components/Expense/ExpenseView';
 import { EditExpenseView } from './components/EditExpense/EditExpenseView';
 import { AddExpenseView } from './components/AddExpense/AddExpenseView';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
     return (
@@ -25,6 +27,7 @@ export const App = () => {
                     <Route path='/expenses/add' element={<AddExpenseView />} />
                 </Routes>
             </Layout>
+            <ToastContainer />
         </>
     );
 };

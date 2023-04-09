@@ -9,6 +9,7 @@ import { ExpenseDetails } from './ExpenseDetails';
 import { GreenButton } from '../Button/GreenButton';
 import { RedButton } from '../Button/RedButton';
 import { OrangeButton } from '../Button/OrangeButton';
+import { toast } from 'react-toastify';
 
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -21,10 +22,14 @@ export const ExpenseView = () => {
         }
 
         const fetchExpense = async () => {
-            const res = await fetch(
-                `http://localhost:3001/expense/${idOfExpense}`,
-            );
-            setOneExpense(await res.json());
+            try {
+                const res = await fetch(
+                    `http://localhost:3001/expense/${idOfExpense}`,
+                );
+                setOneExpense(await res.json());
+            } catch {
+                toast('Coś poszło nie tak!', { type: 'error' });
+            }
         };
 
         fetchExpense();
