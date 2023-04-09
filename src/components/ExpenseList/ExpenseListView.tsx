@@ -14,31 +14,36 @@ import { getOrderStatusLabel } from '../../utils/order-status';
 import { TableCurrencyCell } from './TableCurrencyCell';
 import { TableHeaderCell } from './TableHeaderCell';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
+import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
+import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
+    const [loading, setLoading] = useState<boolean>(false);
 
     const loadExpenses = async () => {
-        const res = await fetch('http://localhost:3001/expense/short-list');
-        const data = await res.json();
+        setLoading(true);
 
-        setAllExpenses(data);
+        try {
+            const res = await fetch('http://localhost:3001/expense/short-list');
+            const data = await res.json();
+
+            setAllExpenses(data);
+        } finally {
+            setLoading(false);
+        }
     };
 
     useEffect(() => {
         loadExpenses();
     }, []);
 
-    const handleDelete = async (id: string) => {
-        try {
-            await fetch(`http://localhost:3001/expense/${id}`, {
-                method: 'DELETE',
-            });
-            await loadExpenses();
-        } catch {
-            console.error('Error occurred while deleting expense.');
-        }
-    };
+    const { isModalOpen, handleModalOpen, handleCancel, handleConfirm } =
+        useDeleteConfirmation({ onDeleteSuccess: loadExpenses });
+
+    if (loading) {
+        return null;
+    }
 
     return (
         <>
@@ -72,7 +77,7 @@ export const ExpenseListView = () => {
                         </TableHead>
                         <TableBody>
                             {allExpenses.map((row) => (
-                                <TableRow key={row.name}>
+                                <TableRow key={row.id}>
                                     <TableCell>
                                         <NavLink
                                             style={{
@@ -108,7 +113,9 @@ export const ExpenseListView = () => {
                                             </IconButton>
                                         </NavLink>
                                         <IconButton
-                                            onClick={() => handleDelete(row.id)}
+                                            onClick={() =>
+                                                handleModalOpen(row.id)
+                                            }
                                             sx={{
                                                 ':hover': {
                                                     backgroundColor:
@@ -170,6 +177,12 @@ export const ExpenseListView = () => {
                     </Button>
                 </NavLink>
             </Box>
+
+            <DeleteConfirmationModal
+                isOpen={isModalOpen}
+                onCancel={handleCancel}
+                onConfirm={handleConfirm}
+            />
         </>
     );
 };
