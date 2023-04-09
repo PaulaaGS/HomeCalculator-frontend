@@ -93,6 +93,7 @@ export const ExpenseForm = ({
                         <TextField
                             fullWidth
                             maxRows={8}
+                            multiline
                             id='description'
                             name='description'
                             label='Opis'
@@ -271,6 +272,8 @@ export const ExpenseForm = ({
                     <Grid item xs={12}>
                         <TextField
                             fullWidth
+                            maxRows={8}
+                            multiline
                             id='url'
                             name='url'
                             label='Link do strony'
@@ -295,9 +298,7 @@ export const ExpenseForm = ({
                 </Box>
                 <Box textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
-                        <OrangeButton width={200}>
-                            Powrót do listy
-                        </OrangeButton>
+                        <OrangeButton width={200}>Powrót do listy</OrangeButton>
                     </NavLink>
                 </Box>
             </Box>

@@ -35,7 +35,6 @@ export const ExpenseTable = ({
                 <TableHead
                     style={{
                         textTransform: 'uppercase',
-                        background: '#faceaa',
                     }}
                 >
                     <TableRow>

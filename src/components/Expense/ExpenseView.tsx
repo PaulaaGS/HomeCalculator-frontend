@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Expense } from '../../interfaces/expense';
 import { useNavigate, useParams } from 'react-router';
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
 import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import { ExpenseDetails } from './ExpenseDetails';
 import { GreenButton } from '../Button/GreenButton';
 import { RedButton } from '../Button/RedButton';
+import { OrangeButton } from '../Button/OrangeButton';
 
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -58,17 +59,7 @@ export const ExpenseView = () => {
                 </Box>
                 <Box margin={'20px 0'} textAlign={'center'}>
                     <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
-                        <Button
-                            variant='contained'
-                            sx={{
-                                ':hover': {
-                                    backgroundColor: '#e07824',
-                                },
-                                backgroundColor: '#f48529',
-                            }}
-                        >
-                            Powrót do listy wydatków
-                        </Button>
+                        <OrangeButton width={200}>Powrót do listy</OrangeButton>
                     </NavLink>
                 </Box>
             </Box>

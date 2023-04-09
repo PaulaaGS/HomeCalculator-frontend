@@ -13,32 +13,33 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
         <Grid container spacing={2}>
             <Grid item xs={12}>
                 <TextField
+                    fullWidth
                     label='Nazwa'
                     name='name'
                     defaultValue={oneExpense.name}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
 
             <Grid item xs={12}>
                 <TextField
+                    fullWidth
+                    maxRows={8}
+                    multiline
                     label='Opis'
                     name='description'
                     defaultValue={oneExpense.description}
-                    multiline
-                    maxRows={8}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
 
             <Grid item xs={4}>
                 <TextField
+                    fullWidth
                     label='Cena jedn. (netto)'
                     name='unitPriceNet'
                     defaultValue={getAmountWithCurrency(
@@ -47,22 +48,22 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
             <Grid item xs={2}>
                 <TextField
+                    fullWidth
                     label='Stawka VAT'
                     name='vatRate'
                     defaultValue={oneExpense.vatRate * 100 + '%'}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
             <Grid item xs={6}>
                 <TextField
+                    fullWidth
                     label='Cena jedn. (brutto)'
                     name='unitPriceGross'
                     defaultValue={getAmountWithCurrency(
@@ -71,34 +72,34 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
 
             <Grid item xs={4}>
                 <TextField
+                    fullWidth
                     label='Ilość'
                     name='quantity'
                     defaultValue={oneExpense.quantity}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
             <Grid item xs={2}>
                 <TextField
+                    fullWidth
                     label='Jednostka'
                     name='unit'
                     defaultValue={getUnitLabel(oneExpense.unit)}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
             <Grid item xs={6}>
                 <TextField
+                    fullWidth
                     label='Cena końcowa (brutto)'
                     name='finalPriceGross'
                     defaultValue={getAmountWithCurrency(
@@ -109,42 +110,43 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
 
             <Grid item xs={6}>
                 <TextField
+                    fullWidth
                     label='Zapłacona kwota (brutto)'
                     name='paidAmount'
                     defaultValue={getAmountWithCurrency(oneExpense.paidAmount)}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
             <Grid item xs={6}>
                 <TextField
+                    fullWidth
                     label='Status zamówienia'
                     name='orderStatus'
                     defaultValue={getOrderStatusLabel(oneExpense.orderStatus)}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
 
             <Grid item xs={12}>
                 <TextField
+                    fullWidth
+                    maxRows={8}
+                    multiline
                     label='Link do strony'
                     name='url'
                     defaultValue={oneExpense.url}
                     InputProps={{
                         readOnly: true,
                     }}
-                    fullWidth
                 />
             </Grid>
         </Grid>
