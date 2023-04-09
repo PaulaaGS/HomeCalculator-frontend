@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, List, ListItem, ListItemText } from '@mui/material';
+import { Box, List, ListItem, ListItemText } from '@mui/material';
 import styled from 'styled-components';
 import { Summary } from '../../interfaces/summary';
 import { Currency } from './Currency';
 import { NavLink } from 'react-router-dom';
+import { OrangeButton } from '../Button/OrangeButton';
 
 const Container = styled.div`
     padding: 5px;
@@ -50,17 +51,7 @@ export const SummaryView = () => {
             </Container>
             <Box margin={'20px 0'} textAlign={'center'}>
                 <NavLink style={{ textDecoration: 'none' }} to='/expenses'>
-                    <Button
-                        variant='contained'
-                        sx={{
-                            ':hover': {
-                                backgroundColor: '#e07824',
-                            },
-                            backgroundColor: '#f48529',
-                        }}
-                    >
-                        Lista wydatków
-                    </Button>
+                    <OrangeButton width={200}>Lista wydatków</OrangeButton>
                 </NavLink>
             </Box>
         </>

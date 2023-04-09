@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ExpenseListView } from './components/ExpenseList/ExpenseListView';
 import { Layout } from './components/Layout/Layout';
 import { SummaryView } from './components/Summary/Summary';
-import { ExpenseView } from './components/Expense/Expense';
+import { ExpenseView } from './components/Expense/ExpenseView';
 import { EditExpenseView } from './components/EditExpense/EditExpenseView';
 import { AddExpenseView } from './components/AddExpense/AddExpenseView';
 

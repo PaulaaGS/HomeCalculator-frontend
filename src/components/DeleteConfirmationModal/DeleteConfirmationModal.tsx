@@ -1,9 +1,6 @@
-import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-} from '@mui/material';
+import { Dialog, DialogActions, DialogContent } from '@mui/material';
+import { RedOutlinedButton } from '../Button/RedOutlinedButton';
+import { GreenOutlinedButton } from '../Button/GreenOutlinedButton';
 
 type DeleteConfirmationModalProps = {
     isOpen: boolean;
@@ -28,38 +25,12 @@ export const DeleteConfirmationModal = ({
         <Dialog open={isOpen}>
             <DialogContent>Czy na pewno chcesz usunąć wydatek?</DialogContent>
             <DialogActions style={{ justifyContent: 'center' }}>
-                <Button
-                    variant='outlined'
-                    sx={{
-                        ':hover': {
-                            color: '#ffffff',
-                            borderColor: '#2a5f4b',
-                            backgroundColor: '#2a5f4b',
-                        },
-                        color: '#2a5f4b',
-                        borderColor: '#2a5f4b',
-                        width: '100px'
-                    }}
-                    onClick={handleCancel}
-                >
+                <GreenOutlinedButton onClick={handleCancel}>
                     Anuluj
-                </Button>
-                <Button
-                    variant='outlined'
-                    sx={{
-                        ':hover': {
-                            color: '#ffffff',
-                            borderColor: '#a6010f',
-                            backgroundColor: '#a6010f',
-                        },
-                        color: '#c30010',
-                        borderColor: '#c30010',
-                        width: '100px'
-                    }}
-                    onClick={handleConfirm}
-                >
+                </GreenOutlinedButton>
+                <RedOutlinedButton onClick={handleConfirm}>
                     Usuń
-                </Button>
+                </RedOutlinedButton>
             </DialogActions>
         </Dialog>
     );

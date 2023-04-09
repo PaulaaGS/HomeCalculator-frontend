@@ -44,6 +44,6 @@ export const useDeleteConfirmation = ({
         isModalOpen,
         handleModalOpen,
         handleCancel,
-        handleConfirm
+        handleConfirm,
     };
 };
