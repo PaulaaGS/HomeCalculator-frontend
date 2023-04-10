@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
 import { Box, List, ListItem, ListItemText } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { Summary } from '../../interfaces/summary';
-import { Currency } from './Currency';
-import { NavLink } from 'react-router-dom';
+import { API_BASE_URL } from '../../utils/base-url';
 import { OrangeButton } from '../Button/OrangeButton';
-import { toast } from 'react-toastify';
+import { Currency } from './Currency';
 
 const Container = styled.div`
     padding: 5px;
@@ -30,7 +31,7 @@ export const SummaryView = () => {
     useEffect(() => {
         const fetchSummary = async () => {
             try {
-                const res = await fetch('http://localhost:3001/summary');
+                const res = await fetch(`${API_BASE_URL}/summary`);
                 const data = await res.json();
 
                 setSummary(data);

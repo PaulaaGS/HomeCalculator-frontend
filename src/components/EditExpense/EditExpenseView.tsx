@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Expense } from '../../interfaces/expense';
-import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { Expense } from '../../interfaces/expense';
+import { API_BASE_URL } from '../../utils/base-url';
+import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 
 export const EditExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -13,9 +14,7 @@ export const EditExpenseView = () => {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(
-                `http://localhost:3001/expense/${idOfExpense}`,
-            );
+            const res = await fetch(`${API_BASE_URL}/expense/${idOfExpense}`);
             setOneExpense(await res.json());
         })();
     }, []);
@@ -24,7 +23,7 @@ export const EditExpenseView = () => {
         setLoading(true);
 
         try {
-            await fetch(`http://localhost:3001/expense/${idOfExpense}`, {
+            await fetch(`${API_BASE_URL}/expense/${idOfExpense}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

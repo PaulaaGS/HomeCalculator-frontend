@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { OrderStatus } from '../../enums/order-status';
-import { Unit } from '../../enums/unit';
-import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { OrderStatus } from '../../enums/order-status';
+import { Unit } from '../../enums/unit';
+import { API_BASE_URL } from '../../utils/base-url';
+import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 
 const initialValues: FormValues = {
     unit: Unit.PIECE,
@@ -19,7 +20,7 @@ export const AddExpenseView = () => {
         setLoading(true);
 
         try {
-            await fetch('http://localhost:3001/expense/', {
+            await fetch(`${API_BASE_URL}/expense`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

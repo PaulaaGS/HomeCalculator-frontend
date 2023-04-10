@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ShortExpense } from '../../interfaces/short-expense';
 
-import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
+import { toast } from 'react-toastify';
 import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
-import { ExpenseTable } from './ExpenseTable';
+import { API_BASE_URL } from '../../utils/base-url';
 import { GreenButton } from '../Button/GreenButton';
 import { OrangeButton } from '../Button/OrangeButton';
-import { toast } from 'react-toastify';
+import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
+import { ExpenseTable } from './ExpenseTable';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
@@ -18,7 +19,7 @@ export const ExpenseListView = () => {
         setLoading(true);
 
         try {
-            const res = await fetch('http://localhost:3001/expense/short-list');
+            const res = await fetch(`${API_BASE_URL}/expense/short-list`);
             const data = await res.json();
 
             setAllExpenses(data);

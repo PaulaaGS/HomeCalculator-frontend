@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../utils/base-url';
 
 type DeleteConfirmationProps = {
     onDeleteSuccess?: () => void;
@@ -13,7 +14,7 @@ export const useDeleteConfirmation = ({
 
     const handleDelete = async (id: string) => {
         try {
-            await fetch(`http://localhost:3001/expense/${id}`, {
+            await fetch(`${API_BASE_URL}/expense/${id}`, {
                 method: 'DELETE',
             });
             toast('Usunięto wydatek!', { type: 'success' });

@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Expense } from '../../interfaces/expense';
-import { useNavigate, useParams } from 'react-router';
 import { Box } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
+import { Expense } from '../../interfaces/expense';
+import { API_BASE_URL } from '../../utils/base-url';
+import { GreenButton } from '../Button/GreenButton';
+import { OrangeButton } from '../Button/OrangeButton';
+import { RedButton } from '../Button/RedButton';
 import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import { ExpenseDetails } from './ExpenseDetails';
-import { GreenButton } from '../Button/GreenButton';
-import { RedButton } from '../Button/RedButton';
-import { OrangeButton } from '../Button/OrangeButton';
-import { toast } from 'react-toastify';
 
 export const ExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
@@ -24,7 +25,7 @@ export const ExpenseView = () => {
         const fetchExpense = async () => {
             try {
                 const res = await fetch(
-                    `http://localhost:3001/expense/${idOfExpense}`,
+                    `${API_BASE_URL}/expense/${idOfExpense}`,
                 );
                 setOneExpense(await res.json());
             } catch {
