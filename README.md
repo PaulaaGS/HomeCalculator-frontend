@@ -40,9 +40,11 @@ Here is a short video to show how the app works:
 -   **React.js**
 
 <br>
-<br>
 
 # Getting Started
+
+Here is the backend repository of the application:  
+[HomeCalculator-backend](https://github.com/PaulaaGS/HomeCalculator-backend)
 
 ## Installation
 
