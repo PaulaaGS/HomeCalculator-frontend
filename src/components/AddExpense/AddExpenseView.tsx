@@ -8,6 +8,9 @@ import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
 import { Category } from '../../enums/category';
 
 const initialValues: FormValues = {
+    name: '',
+    unitPriceGross: undefined,
+    quantity: undefined,
     unit: Unit.PIECE,
     orderStatus: OrderStatus.NOT_ORDERED,
     category: Category.MAIN,
