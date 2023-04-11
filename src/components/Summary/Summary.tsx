@@ -7,6 +7,7 @@ import { Summary } from '../../interfaces/summary';
 import { API_BASE_URL } from '../../utils/base-url';
 import { OrangeButton } from '../Button/OrangeButton';
 import { Currency } from './Currency';
+import { Spinner } from '../Spinner/Spinner';
 
 const Container = styled.div`
     padding: 5px;
@@ -23,6 +24,7 @@ const style = {
 };
 
 export const SummaryView = () => {
+    const [loading, setLoading] = useState<boolean>(true);
     const [summary, setSummary] = useState<Summary>({
         expensesSum: 0,
         expensesPaid: 0,
@@ -30,6 +32,8 @@ export const SummaryView = () => {
 
     useEffect(() => {
         const fetchSummary = async () => {
+            setLoading(true);
+
             try {
                 const res = await fetch(`${API_BASE_URL}/summary`);
                 const data = await res.json();
@@ -37,10 +41,17 @@ export const SummaryView = () => {
                 setSummary(data);
             } catch {
                 toast('Coś poszło nie tak!', { type: 'error' });
+            } finally {
+                setLoading(false);
             }
         };
+
         fetchSummary();
     }, []);
+
+    if (loading) {
+        return <Spinner />;
+    }
 
     return (
         <>

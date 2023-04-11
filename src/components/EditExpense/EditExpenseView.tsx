@@ -5,19 +5,36 @@ import { toast } from 'react-toastify';
 import { Expense } from '../../interfaces/expense';
 import { API_BASE_URL } from '../../utils/base-url';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
+import { Spinner } from '../Spinner/Spinner';
 
 export const EditExpenseView = () => {
     const [oneExpense, setOneExpense] = useState<Expense | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
     const { idOfExpense } = useParams();
 
     useEffect(() => {
-        (async () => {
-            const res = await fetch(`${API_BASE_URL}/expense/${idOfExpense}`);
-            setOneExpense(await res.json());
-        })();
-    }, []);
+        if (!idOfExpense) {
+            return;
+        }
+
+        const fetchExpense = async () => {
+            setLoading(true);
+
+            try {
+                const res = await fetch(
+                    `${API_BASE_URL}/expense/${idOfExpense}`,
+                );
+                setOneExpense(await res.json());
+            } catch {
+                toast('Coś poszło nie tak!', { type: 'error' });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchExpense();
+    }, [idOfExpense]);
 
     const onFormSubmit = async (values: FormValues) => {
         setLoading(true);
@@ -41,6 +58,10 @@ export const EditExpenseView = () => {
             setLoading(false);
         }
     };
+
+    if (!oneExpense && loading) {
+        return <Spinner />;
+    }
 
     return oneExpense ? (
         <ExpenseForm

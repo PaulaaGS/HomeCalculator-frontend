@@ -1,19 +1,19 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ShortExpense } from '../../interfaces/short-expense';
-
 import { toast } from 'react-toastify';
 import { useDeleteConfirmation } from '../../hooks/useDeleteConfirmation';
+import { ShortExpense } from '../../interfaces/short-expense';
 import { API_BASE_URL } from '../../utils/base-url';
 import { GreenButton } from '../Button/GreenButton';
 import { OrangeButton } from '../Button/OrangeButton';
 import { DeleteConfirmationModal } from '../DeleteConfirmationModal/DeleteConfirmationModal';
+import { Spinner } from '../Spinner/Spinner';
 import { ExpenseTable } from './ExpenseTable';
 
 export const ExpenseListView = () => {
     const [allExpenses, setAllExpenses] = useState<ShortExpense[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(true);
 
     const loadExpenses = async () => {
         setLoading(true);
@@ -38,7 +38,7 @@ export const ExpenseListView = () => {
         useDeleteConfirmation({ onDeleteSuccess: loadExpenses });
 
     if (loading) {
-        return null;
+        return <Spinner />;
     }
 
     return (
