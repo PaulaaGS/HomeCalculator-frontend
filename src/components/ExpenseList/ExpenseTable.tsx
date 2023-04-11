@@ -15,6 +15,7 @@ import { TableHeaderCell } from './TableHeaderCell';
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
 import { ShortExpense } from '../../interfaces/short-expense';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import { getCategoryLabel } from '../../utils/category';
 
 type ExpenseTableProps = {
     allExpenses: ShortExpense[];
@@ -41,6 +42,7 @@ export const ExpenseTable = ({
                         <TableHeaderCell>Wydatek</TableHeaderCell>
                         <TableHeaderCell>Cena</TableHeaderCell>
                         <TableHeaderCell>Zapłacona kwota</TableHeaderCell>
+                        <TableHeaderCell>Kategoria</TableHeaderCell>
                         <TableHeaderCell>Status</TableHeaderCell>
                         <TableHeaderCell> </TableHeaderCell>
                     </TableRow>
@@ -62,6 +64,9 @@ export const ExpenseTable = ({
                             </TableCell>
                             <TableCurrencyCell amount={row.price} />
                             <TableCurrencyCell amount={row.paidAmount} />
+                            <TableCell align='center'>
+                                {getCategoryLabel(row.category)}
+                            </TableCell>
                             <TableCell align='center'>
                                 {getOrderStatusLabel(row.orderStatus)}
                             </TableCell>

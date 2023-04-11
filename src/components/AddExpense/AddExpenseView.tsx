@@ -5,10 +5,12 @@ import { OrderStatus } from '../../enums/order-status';
 import { Unit } from '../../enums/unit';
 import { API_BASE_URL } from '../../utils/base-url';
 import { ExpenseForm, FormValues } from '../ExpenseForm/ExpenseForm';
+import { Category } from '../../enums/category';
 
 const initialValues: FormValues = {
     unit: Unit.PIECE,
     orderStatus: OrderStatus.NOT_ORDERED,
+    category: Category.MAIN,
     vatRate: 0.23,
 };
 

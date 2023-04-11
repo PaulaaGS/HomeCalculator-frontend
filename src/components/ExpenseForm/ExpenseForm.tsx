@@ -17,6 +17,8 @@ import { OrderStatus } from '../../enums/order-status';
 import { getOrderStatusLabel } from '../../utils/order-status';
 import { GreenButton } from '../Button/GreenButton';
 import { OrangeButton } from '../Button/OrangeButton';
+import { Category } from '../../enums/category';
+import { getCategoryLabel } from '../../utils/category';
 
 export type FormValues = Partial<Omit<Expense, 'id'>>;
 
@@ -237,7 +239,43 @@ export const ExpenseForm = ({
                         />
                     </Grid>
 
-                    <Grid item xs={6}>
+                    <Grid item xs={3}>
+                        <FormControl fullWidth>
+                            <InputLabel id='categoryLabel'>
+                                Kategoria
+                            </InputLabel>
+                            <Select
+                                labelId='categoryLabel'
+                                id='category'
+                                name='category'
+                                label='Kategoria'
+                                value={formik.values.category}
+                                onChange={formik.handleChange}
+                                error={
+                                    formik.touched.category &&
+                                    Boolean(formik.errors.category)
+                                }
+                            >
+                                <MenuItem value={Category.MAIN}>
+                                    {getCategoryLabel(Category.MAIN)}
+                                </MenuItem>
+                                <MenuItem value={Category.LIGHTING}>
+                                    {getCategoryLabel(Category.LIGHTING)}
+                                </MenuItem>
+                                <MenuItem value={Category.APPLIANCES}>
+                                    {getCategoryLabel(Category.APPLIANCES)}
+                                </MenuItem>
+                                <MenuItem value={Category.FURNITURE}>
+                                    {getCategoryLabel(Category.FURNITURE)}
+                                </MenuItem>
+                                <MenuItem value={Category.OTHERS}>
+                                    {getCategoryLabel(Category.OTHERS)}
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+
+                    <Grid item xs={3}>
                         <FormControl fullWidth>
                             <InputLabel id='orderStatusLabel'>
                                 Status zamówienia

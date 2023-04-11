@@ -1,3 +1,4 @@
+import { Category } from '../enums/category';
 import { OrderStatus } from '../enums/order-status';
 import { Unit } from '../enums/unit';
 
@@ -12,4 +13,5 @@ export interface Expense {
     orderStatus: OrderStatus;
     url: string | null;
     vatRate: number;
+    category: Category;
 }
