@@ -3,6 +3,7 @@ import { getAmountWithCurrency } from '../../utils/currency';
 import { getOrderStatusLabel } from '../../utils/order-status';
 import { getUnitLabel } from '../../utils/unit';
 import { Expense } from '../../interfaces/expense';
+import { getCategoryLabel } from '../../utils/category';
 
 type ExpenseDetailsProps = {
     oneExpense: Expense;
@@ -124,7 +125,20 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
                     }}
                 />
             </Grid>
-            <Grid item xs={6}>
+
+            <Grid item xs={3}>
+                <TextField
+                    fullWidth
+                    label='Kategoria'
+                    name='category'
+                    defaultValue={getCategoryLabel(oneExpense.category)}
+                    InputProps={{
+                        readOnly: true,
+                    }}
+                />
+            </Grid>
+
+            <Grid item xs={3}>
                 <TextField
                     fullWidth
                     label='Status zamówienia'
