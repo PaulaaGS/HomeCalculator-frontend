@@ -38,7 +38,7 @@ const validationSchema = yup.object({
         .string()
         .nullable()
         .max(10000, 'Opis może mieć maksymalnie 10000 znaków'),
-    unitPriceNet: yup
+    unitPriceGross: yup
         .number()
         .required('Pole obowiązkowe')
         .min(0, 'Cena nie może być ujemna'),
@@ -115,19 +115,19 @@ export const ExpenseForm = ({
                     <Grid item xs={6}>
                         <TextField
                             fullWidth
-                            id='unitPriceNet'
-                            name='unitPriceNet'
-                            label='Cena jedn. (netto)'
+                            id='unitPriceGross'
+                            name='unitPriceGross'
+                            label='Cena jedn. (brutto)'
                             type='number'
-                            value={formik.values.unitPriceNet}
+                            value={formik.values.unitPriceGross}
                             onChange={formik.handleChange}
                             error={
-                                formik.touched.unitPriceNet &&
-                                Boolean(formik.errors.unitPriceNet)
+                                formik.touched.unitPriceGross &&
+                                Boolean(formik.errors.unitPriceGross)
                             }
                             helperText={
-                                formik.touched.unitPriceNet &&
-                                formik.errors.unitPriceNet
+                                formik.touched.unitPriceGross &&
+                                formik.errors.unitPriceGross
                             }
                             InputProps={{
                                 endAdornment: (
@@ -261,6 +261,12 @@ export const ExpenseForm = ({
                                 </MenuItem>
                                 <MenuItem value={Category.LIGHTING}>
                                     {getCategoryLabel(Category.LIGHTING)}
+                                </MenuItem>
+                                <MenuItem value={Category.KITCHEN}>
+                                    {getCategoryLabel(Category.KITCHEN)}
+                                </MenuItem>
+                                <MenuItem value={Category.BATHROOM}>
+                                    {getCategoryLabel(Category.BATHROOM)}
                                 </MenuItem>
                                 <MenuItem value={Category.APPLIANCES}>
                                     {getCategoryLabel(Category.APPLIANCES)}

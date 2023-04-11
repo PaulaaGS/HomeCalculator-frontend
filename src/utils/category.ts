@@ -7,6 +7,8 @@ type CategoryObj = {
 const CategoryLabel: CategoryObj = {
     main: 'Główna',
     lighting: 'Oświetlenie',
+    bathroom: 'Łazienka',
+    kitchen: 'Kuchnia',
     appliances: 'RTV i AGD',
     furniture: 'Meble',
     others: 'Inne',

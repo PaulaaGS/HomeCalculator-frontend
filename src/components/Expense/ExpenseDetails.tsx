@@ -41,10 +41,10 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
             <Grid item xs={4}>
                 <TextField
                     fullWidth
-                    label='Cena jedn. (netto)'
-                    name='unitPriceNet'
+                    label='Cena jedn. (brutto)'
+                    name='unitPriceGross'
                     defaultValue={getAmountWithCurrency(
-                        oneExpense.unitPriceNet,
+                        oneExpense.unitPriceGross,
                     )}
                     InputProps={{
                         readOnly: true,
@@ -65,10 +65,11 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
             <Grid item xs={6}>
                 <TextField
                     fullWidth
-                    label='Cena jedn. (brutto)'
-                    name='unitPriceGross'
+                    label='Cena końcowa (netto)'
+                    name='finalPriceNet'
                     defaultValue={getAmountWithCurrency(
-                        oneExpense.unitPriceNet * (oneExpense.vatRate + 1),
+                        (oneExpense.unitPriceGross / (oneExpense.vatRate + 1)) *
+                            oneExpense.quantity,
                     )}
                     InputProps={{
                         readOnly: true,
@@ -104,9 +105,7 @@ export const ExpenseDetails = ({ oneExpense }: ExpenseDetailsProps) => {
                     label='Cena końcowa (brutto)'
                     name='finalPriceGross'
                     defaultValue={getAmountWithCurrency(
-                        oneExpense.unitPriceNet *
-                            (oneExpense.vatRate + 1) *
-                            oneExpense.quantity,
+                        oneExpense.unitPriceGross * oneExpense.quantity,
                     )}
                     InputProps={{
                         readOnly: true,
