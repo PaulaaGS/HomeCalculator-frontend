@@ -1,46 +1,86 @@
-# Getting Started with Create React App
+# Home Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Navigation
 
-## Available Scripts
+-   [About The Project](#about-the-project)
+    -   [Demo](#demo)
+    -   [Tech Stack](#tech-stack)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+-   [Roadmap](#roadmap)
+-   [Contact](#contact)
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+# About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Home Calculator is an application designed for people who likes planning their home budget during the renovation or finishing their home.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Home Page](/images/readme-01.jpg)
 
-### `npm test`
+The home page shows a summary of all expenses you will have to pay to finish your home and expenses already incurred.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+You can display a list of expenses, add new expense, edit and delete.
 
-### `npm run build`
+![List od expenses](/images/readme-02.jpg)
+![Expense form](/images/readme-03.jpg)
+![Expense](/images/readme-04.jpg)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Demo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Here is a short video to show how the app works:
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   **TypeScript**
+-   **React.js**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Getting Started
 
-## Learn More
+Here is the backend repository of the application:  
+[HomeCalculator-backend](https://github.com/PaulaaGS/HomeCalculator-backend)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Installation
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Clone the repository
+    ```sh
+    git clone https://https://github.com/PaulaaGS/HomeCalculator-frontend.git
+    ```
+2. Go to the project directory
+    ```sh
+    cd HomeCalculator-frontend
+    ```
+3. Install NPM packages
+    ```sh
+    npm install
+    ```
+4. Start the server development
+    ```js
+    npm start
+    ```
+
+<br>
+
+# Roadmap
+
+Next steps to develop the application:
+
+-   add browsing history and the ability to return to the previous page using the back arrow
+-   filtering (for example by order status)
+-   write tests
+-   responsive design
+-   accessibility
+-   add registration panel and logging page
+-   add posibility to change language for english and add other currencies and imperial units
+
+<br>
+
+# Contact
+
+Paulina: paulina.a.gaweda@gmail.com

@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { ExpenseListView } from './components/ExpenseList/ExpenseListView';
+import { Layout } from './components/Layout/Layout';
+import { SummaryView } from './components/Summary/Summary';
+import { ExpenseView } from './components/Expense/ExpenseView';
+import { EditExpenseView } from './components/EditExpense/EditExpenseView';
+import { AddExpenseView } from './components/AddExpense/AddExpenseView';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+export const App = () => {
+    return (
+        <>
+            <Layout>
+                <Routes>
+                    <Route path='/' element={<SummaryView />} />
+                    <Route path='/expenses' element={<ExpenseListView />} />
+                    <Route
+                        path='/expenses/:idOfExpense'
+                        element={<ExpenseView />}
+                    />
+                    <Route
+                        path='/expenses/edit/:idOfExpense'
+                        element={<EditExpenseView />}
+                    />
+                    <Route path='/expenses/add' element={<AddExpenseView />} />
+                </Routes>
+            </Layout>
+            <ToastContainer />
+        </>
+    );
+};
