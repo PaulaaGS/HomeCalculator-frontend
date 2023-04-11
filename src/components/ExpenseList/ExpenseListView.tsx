@@ -49,10 +49,14 @@ export const ExpenseListView = () => {
                 margin='0 auto'
                 overflow='hidden'
             >
-                <ExpenseTable
-                    allExpenses={allExpenses}
-                    onDeleteClick={handleModalOpen}
-                />
+                {allExpenses.length ? (
+                    <ExpenseTable
+                        allExpenses={allExpenses}
+                        onDeleteClick={handleModalOpen}
+                    />
+                ) : (
+                    'Lista wydatków jest pusta. Dodaj nowy wydatek.'
+                )}
                 <Box
                     margin='20px 0'
                     justifyContent={'flex-end'}
